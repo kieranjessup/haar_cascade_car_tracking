@@ -4,12 +4,11 @@ import cv2
 import numpy as np
 
 # source footage
-#cap = cv2.VideoCapture('')
 cap = cv2.VideoCapture('traffic.mp4')
 
 
-# pre-trained classifier
-car_classifier_file = 'car.xml'
+# pre-trained classifier using GUI
+car_classifier_file = 'haar_models/car.xml'
 
 # create classifier
 car_tracking = cv2.CascadeClassifier(car_classifier_file)
@@ -34,12 +33,12 @@ while True:
     for (x, y, w, h) in cars:
         cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 2)
 
-    cv2.imshow('lol', frame)
+    cv2.imshow('capture', frame)
 
-    # stop auto-close
+    # press Q to exit
     key = cv2.waitKey(1)
     if key == ord('q'):
         break
 
-video.release()
+cap.release()
 cv2.destroyAllWindows()
